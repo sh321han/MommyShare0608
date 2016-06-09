@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MommyShare</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_chatting">ChattingActivity</string>
+    <string name="title_activity_chatting_list">ChattingListActivity</string>
+    <string name="title_activity_notice">NoticeActivity</string>
+    <string name="title_activity_notice_detail">NoticeDetailActivity</string>
+    <string name="title_activity_my_profile">MyProfileActivity</string>
+    <string name="title_activity_my_product_list">MyProductListActivity</string>
+    <string name="title_activity_my_wish_list">MyWishListActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_write">WriteActivity</string>
+    <string name="title_activity_other_product_detail">OtherProductDetailActivity</string>
+    <string name="title_activity_my_product_detail">MyProductDetailActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_write_detail">WriteDetailActivity</string>
+    <string name="title_activity_other_profile">OtherProfileActivity</string>
+    <string name="facebook_app_id">1544383425865845</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false"> AIzaSyBLbvHKa-pIlMbmxrjLfHEVKo2LyTx9FfY </string>
+    <string name="title_activity_write_location">WriteLocationActivity</string>
+</resources>

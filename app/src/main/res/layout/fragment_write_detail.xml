@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="45dp"
+        android:text="상세 내용"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <EditText
+        android:id="@+id/edit_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="31dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="10" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_camera"
+        android:layout_below="@+id/edit_detail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_menu_camera"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_gallery"
+        android:layout_below="@+id/edit_detail"
+        android:layout_toRightOf="@+id/btn_camera"
+        android:layout_toEndOf="@+id/btn_camera"
+        android:src="@drawable/ic_menu_gallery"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image1"
+        android:layout_alignBottom="@+id/btn_gallery"
+        android:layout_toRightOf="@+id/btn_gallery"
+        android:layout_toEndOf="@+id/btn_gallery"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image2"
+        android:layout_alignBottom="@+id/image1"
+        android:layout_toRightOf="@+id/image1"
+        android:layout_toEndOf="@+id/image1"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image3"
+        android:layout_alignBottom="@+id/image2"
+        android:layout_toRightOf="@+id/image2"
+        android:layout_toEndOf="@+id/image2"/>
+
+
+</RelativeLayout>

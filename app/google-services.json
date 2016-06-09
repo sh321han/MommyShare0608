@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "405371759447",
+    "project_id": "mommyshare-757d"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405371759447:android:92dcf1113011d800",
+        "android_client_info": {
+          "package_name": "com.sh321han.mommyshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB05D7Ke-wEBOiuj3K_8O1-r0ZHEx6rFjQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

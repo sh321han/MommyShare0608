@@ -1,0 +1,142 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sh321han.mommyshare.Write.WriteFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="상품명"
+        android:id="@+id/product_name"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        />
+
+    <EditText
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_name"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="30dp"
+        android:singleLine="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="카테고리"
+        android:id="@+id/text_category"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"/>
+
+    <Spinner
+        android:layout_width="146dp"
+        android:layout_height="40dp"
+        android:id="@+id/spinner"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="물품 가격"
+        android:id="@+id/text_price"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="30dp"/>
+
+    <EditText
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_price"
+        android:inputType="number"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="30dp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="보증금"
+        android:id="@+id/text_deposit"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="30dp"/>
+
+    <EditText
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_deposit"
+        android:inputType="number"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="225dp"
+        android:layout_marginLeft="30dp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="대여가능기간"
+        android:id="@+id/text_period"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="30dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="최소"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="-20dp"
+        android:singleLine="true"/>
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_min_period"
+        android:inputType="number"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="20dp"
+        android:singleLine="true"
+        android:imeOptions="actionNext"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="일 ~ 최대"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="80dp"/>
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_max_period"
+        android:inputType="number"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="140dp"
+        android:singleLine="true"/>
+
+
+
+</FrameLayout>

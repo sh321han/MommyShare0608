@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sh321han.mommyshare">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="com.sh321han.mommyshare.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.sh321han.mommyshare.permission.C2D_MESSAGE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoStatusBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Main.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chatting.ChattingActivity"
+            android:label="@string/title_activity_chatting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chatting.ChattingListActivity"
+            android:label="@string/title_activity_chatting_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Notice.NoticeActivity"
+            android:label="@string/title_activity_notice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Notice.NoticeDetailActivity"
+            android:label="@string/title_activity_notice_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProductList.MyProductListActivity"
+            android:label="@string/title_activity_my_product_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyWishList.MyWishListActivity"
+            android:label="@string/title_activity_my_wish_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Setting.SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Write.WriteActivity"
+            android:label="@string/title_activity_write"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProductDetail.MyProductDetailActivity"
+            android:label="@string/title_activity_my_product_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Profile.MyProfileActivity"
+            android:label="@string/title_activity_my_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Profile.OtherProfileActivity"
+            android:label="@string/title_activity_other_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OtherProductDetail.OtherProductDetailActivity"
+            android:label="@string/title_activity_other_product_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1544383425865845"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".Write.WriteLocationActivity"
+            android:label="@string/title_activity_write_location"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignUpActivity"></activity>
+
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.sh321han.mommyshare" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".GCM.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".GCM.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".GCM.RegistrationIntentService"
+            android:exported="false">
+        </service>
+
+
+    </application>
+
+</manifest>

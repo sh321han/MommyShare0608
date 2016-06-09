@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#e4e9ea">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="13dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/render_txt" />
+
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="44dp"
+        android:layout_toEndOf="@+id/image_profile"
+        android:layout_toRightOf="@+id/image_profile"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="12dp" />
+
+
+    <ImageButton
+        android:id="@+id/btn_chat"
+        android:layout_width="245dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/text_name"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="11dp"
+        android:layout_toRightOf="@+id/image_profile"
+        android:src="@drawable/send_btn" />
+
+
+</RelativeLayout>

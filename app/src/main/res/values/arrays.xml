@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_item">
+        <item>전체</item>
+        <item>출산/임부 용품</item>
+        <item>유/아동 의류</item>
+        <item>유/아동 용품</item>
+        <item>유/아동 교육, 책</item>
+        <item>완구</item>
+    </string-array>
+
+    <string-array name="price_item">
+        <item>저가순</item>
+        <item>고가순</item>
+        <item>등록순</item>
+    </string-array>
+
+    <string-array name="dist_item">
+        <item>모든거리</item>
+        <item>2km 이내</item>
+        <item>5km 이내</item>
+    </string-array>
+
+    <string-array name="setting_item">
+        <item>푸시알림</item>
+        <item>로그아웃</item>
+        <item>회원탈퇴</item>
+        <item>공지사항</item>
+        <item>버전정보</item>
+    </string-array>
+    <string-array name="notice_list">
+        <item>공지 1</item>
+        <item>공지 2</item>
+        <item>공지 3</item>
+        <item>공지 4</item>
+        <item>공지 5</item>
+
+    </string-array>
+
+</resources>
