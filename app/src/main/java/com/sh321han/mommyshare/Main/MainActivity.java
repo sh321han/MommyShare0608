@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView imageView;
-//babo
-    //babo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +39,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
