@@ -4,14 +4,21 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.WorkerThread;
+import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sh321han.mommyshare.GoogleMap.AddressInfo;
 import com.sh321han.mommyshare.GoogleMap.AddressInfoResult;
 import com.sh321han.mommyshare.GoogleMap.PoiSearchResult;
 import com.sh321han.mommyshare.GoogleMap.SearchPOIInfo;
 import com.sh321han.mommyshare.MyApplication;
+import com.sh321han.mommyshare.MyResult;
+import com.sh321han.mommyshare.MyResultError;
+import com.sh321han.mommyshare.MyResultStatus;
 import com.sh321han.mommyshare.data.CategoryList;
+import com.sh321han.mommyshare.data.ChatMessage;
 import com.sh321han.mommyshare.data.KeepData;
 import com.sh321han.mommyshare.data.LoginResult;
 import com.sh321han.mommyshare.data.MainProduct;
@@ -25,6 +32,7 @@ import com.sh321han.mommyshare.data.WriteDataResult;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.URLEncoder;
@@ -118,13 +126,13 @@ public class NetworkManager {
     private static final String MAIN_PRODUCT_URL = MOMMYSHARE_SERVER + "/product/list?category=%s";
 
     public Request MainProductList(String category, OnResultListener<List<MainProduct>> listener) {
-        String url="";
+        String url = "";
 
-        if(category.equals("전체")){
-            category="";
+        if (category.equals("전체")) {
+            category = "";
         }
         try {
-            url = String.format(MAIN_PRODUCT_URL,  URLEncoder.encode(category, "utf-8"));
+            url = String.format(MAIN_PRODUCT_URL, URLEncoder.encode(category, "utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -162,9 +170,6 @@ public class NetworkManager {
         });
         return request;
     }
-
-
-
 
 
     private static final String PRODUCT_DETAIL_URL = MOMMYSHARE_SERVER + "/product/%s";
@@ -206,7 +211,6 @@ public class NetworkManager {
     }
 
 
-
     private static final String PRODUCT_CATEGOTY_LIST = MOMMYSHARE_SERVER + "/product/category";
 
     public Request getCategoryList(Object tag, OnResultListener<List<String>> listener) {
@@ -246,9 +250,6 @@ public class NetworkManager {
     }
 
 
-
-
-
     private static final String PRODUCT_WRITE_URL = MOMMYSHARE_SERVER + "/product/write";
 
     public Request ProductWrite(double longitude, double latitude, String name, String category,
@@ -258,13 +259,13 @@ public class NetworkManager {
         RequestBody body = new FormBody.Builder()
                 .add("name", name)
                 .add("category", category)
-                .add("rent_fee", rent_fee+"")
-                .add("rent_deposit", rent_deposit+"")
-                .add("min_rent_period", min_rent_period+"")
-                .add("max_rent_period", max_rent_period+"")
+                .add("rent_fee", rent_fee + "")
+                .add("rent_deposit", rent_deposit + "")
+                .add("min_rent_period", min_rent_period + "")
+                .add("max_rent_period", max_rent_period + "")
                 .add("content", content)
-                .add("longitude", longitude+"")
-                .add("latitude", latitude+"")
+                .add("longitude", longitude + "")
+                .add("latitude", latitude + "")
                 .build();
 
 
@@ -393,6 +394,7 @@ public class NetworkManager {
     }
 
     private static final String LOGIN = MOMMYSHARE_SERVER + "/member/login";
+
     public Request login(Context context, String token, String registrationToken, OnResultListener<LoginResult> listener) {
         RequestBody body = new FormBody.Builder()
                 .add("token", token)
@@ -435,18 +437,116 @@ public class NetworkManager {
     }
 
 
+    private static final String URL_MESSAGE_LIST = MOMMYSHARE_SERVER + "/message/call";
+
+    @WorkerThread
+    public MyResult<List<ChatMessage>> getMessageSync(String lastDate) throws IOException {
+        String url = URL_MESSAGE_LIST;
+//        if (!TextUtils.isEmpty(lastDate)) {
+//            url += "?lastDate=" + URLEncoder.encode(lastDate, "utf-8");
+//        }
+        Log.i("check", lastDate);
+        RequestBody body = new FormBody.Builder()
+                .add("date", lastDate)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        Response response = mClient.newCall(request).execute();
+
+        if (response.isSuccessful()) {
+            String text = response.body().string();
+            MyResultStatus status = gson.fromJson(text, MyResultStatus.class);
+            if (status.code == 1) {
+                Type type = new TypeToken<MyResult<List<ChatMessage>>>() {
+                }.getType();
+                MyResult<List<ChatMessage>> data = gson.fromJson(text, type);
+                return data;
+            } else {
+                MyResultError data = gson.fromJson(text, MyResultError.class);
+                throw new IOException(data.result);
+            }
+        } else {
+            throw new IOException(response.message());
+        }
+    }
+
+
+    private static final String URL_SEND_MESSAGE = MOMMYSHARE_SERVER + "/message/send";
+
+    public Request sendMessage(Object tag, long receiverid, String message,
+                               OnResultListener<MyResult<String>> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("receiver", "" + receiverid)
+                .add("message", message)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SEND_MESSAGE)
+                .post(body)
+                .build();
+
+        final NetworkResult<MyResult<String>> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.excpetion = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    MyResultStatus status = gson.fromJson(text, MyResultStatus.class);
+                    if (status.code == 1) {
+                        Type type = new TypeToken<MyResult<String>>() {
+                        }.getType();
+                        MyResult<String> data = gson.fromJson(text, type);
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        MyResultError data = gson.fromJson(text, MyResultError.class);
+                        result.excpetion = new IOException(data.result);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+                } else {
+                    result.excpetion = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     private static final String TMAP_SERVER = "https://apis.skplanetx.com";
     private static final String TMAP_REVERSE_GEOCODING = TMAP_SERVER + "/tmap/geo/reversegeocoding?coordType=WGS84GEO&addressType=A02&lat=%s&lon=%s&version=1";
+
     public Request getTMapReverseGeocoding(Object tag, double lat, double lng, OnResultListener<AddressInfo> listener) {
-        String url = String.format(TMAP_REVERSE_GEOCODING, "" + lat, ""+lng);
+        String url = String.format(TMAP_REVERSE_GEOCODING, "" + lat, "" + lng);
         Request request = new Request.Builder()
                 .url(url)
-                .header("Accept","application/json")
-                .header("appKey","458a10f5-c07e-34b5-b2bd-4a891e024c2a")
+                .header("Accept", "application/json")
+                .header("appKey", "458a10f5-c07e-34b5-b2bd-4a891e024c2a")
                 .build();
         final NetworkResult<AddressInfo> result = new NetworkResult<>();
         result.request = request;
@@ -473,12 +573,13 @@ public class NetworkManager {
     }
 
     private static final String TMAP_SEARCH_POI = TMAP_SERVER + "/tmap/pois?searchKeyword=%s&resCoordType=WGS84GEO&version=1";
+
     public Request getTMapSearchPOI(Object tag, String keyword, OnResultListener<SearchPOIInfo> listener) throws UnsupportedEncodingException {
-        String url = String.format(TMAP_SEARCH_POI, URLEncoder.encode(keyword,"utf-8"));
+        String url = String.format(TMAP_SEARCH_POI, URLEncoder.encode(keyword, "utf-8"));
         Request request = new Request.Builder()
                 .url(url)
-                .header("Accept","application/json")
-                .header("appKey","458a10f5-c07e-34b5-b2bd-4a891e024c2a")
+                .header("Accept", "application/json")
+                .header("appKey", "458a10f5-c07e-34b5-b2bd-4a891e024c2a")
                 .build();
         final NetworkResult<SearchPOIInfo> result = new NetworkResult<>();
         result.request = request;
@@ -503,8 +604,6 @@ public class NetworkManager {
         });
         return request;
     }
-
-
 
 
 }

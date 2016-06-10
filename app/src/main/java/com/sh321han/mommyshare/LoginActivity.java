@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                                            SharedPreferences.Editor editor =  mPref.edit();
 //                                            editor.putInt("member_id", result.getResult().getMember_id());
-
+                                                //editor.commit();
 
 
                                         } else if (result.getMessage().equals("NOTREGISTER")) {

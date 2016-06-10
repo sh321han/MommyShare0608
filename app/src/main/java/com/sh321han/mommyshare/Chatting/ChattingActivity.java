@@ -15,10 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.sh321han.mommyshare.GCM.MyGcmListenerService;
+import com.sh321han.mommyshare.Manager.DataConstant;
 import com.sh321han.mommyshare.Manager.DataManager;
+import com.sh321han.mommyshare.Manager.NetworkManager;
+import com.sh321han.mommyshare.MyResult;
 import com.sh321han.mommyshare.R;
 import com.sh321han.mommyshare.User;
-import com.sh321han.mommyshare.GCM.MyGcmListenerService;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class ChattingActivity extends AppCompatActivity {
     public static final String EXTRA_USER = "user";
@@ -44,22 +51,22 @@ public class ChattingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String message = inputView.getText().toString();
                 if (!TextUtils.isEmpty(message)) {
-//                    NetworkManager.getInstance().sendMessage(ChattingActivity.this, user.id, message, new NetworkManager.OnResultListener<MyResult<String>>() {
-//                        @Override
-//                        public void onSuccess(Request request, MyResult<String> result) {
-//                            if (userid == -1) {
-//                                userid = DataManager.getInstance().getUserTableId(user);
-//                            }
-//                            DataManager.getInstance().addChatMessage(userid, DataConstant.ChatTable.TYPE_SEND, message, null);
-//                            initData();
-//                            inputView.setText("");
-//                        }
-//
-//                        @Override
-//                        public void onFail(Request request, IOException exception) {
-//
-//                        }
-//                    });
+                    NetworkManager.getInstance().sendMessage(ChattingActivity.this, user.id, message, new NetworkManager.OnResultListener<MyResult<String>>() {
+                        @Override
+                        public void onSuccess(Request request, MyResult<String> result) {
+                            if (userid == -1) {
+                                userid = DataManager.getInstance().getUserTableId(user);
+                            }
+                            DataManager.getInstance().addChatMessage(userid, DataConstant.ChatTable.TYPE_SEND, message, null);
+                            initData();
+                            inputView.setText("");
+                        }
+
+                        @Override
+                        public void onFail(Request request, IOException exception) {
+
+                        }
+                    });
                 }
             }
         });

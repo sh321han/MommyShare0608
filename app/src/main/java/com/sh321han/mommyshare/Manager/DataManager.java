@@ -83,6 +83,20 @@ public class DataManager extends SQLiteOpenHelper {
         return db.insert(DataConstant.ChatUserTable.TABLE_NAME, null, values);
     }
 
+    public String getLastDate() {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] columns = {DataConstant.ChatTable.COLUMN_DATE};
+        String orderBy = DataConstant.ChatTable.COLUMN_DATE + " DESC";
+        String limit = "1";
+        Cursor c = db.query(DataConstant.ChatTable.TABL_NAME, columns, null, null, null, null, orderBy, limit);
+        if (!c.moveToNext()) {
+            c.close();
+            return null;
+        }
+        String date = c.getString(c.getColumnIndex(DataConstant.ChatTable.COLUMN_DATE));
+        c.close();
+        return date;
+    }
     public String getLastDate(long serverid) {
         long id = getChatUserId(serverid);
         if (id == INVALID_ID) return null;

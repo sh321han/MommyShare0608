@@ -121,7 +121,8 @@ public class MainFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(categoryList!=null) {
 //                    Toast.makeText(getActivity(), categoryList.get(position), Toast.LENGTH_LONG).show();
-                    category = categoryList.get(position);
+                    //수정
+                    if(categoryList.size() != 0) category = categoryList.get(position);
                     setData(category);
                 }
 
