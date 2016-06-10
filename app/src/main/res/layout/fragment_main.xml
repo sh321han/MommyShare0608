@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sh321han.mommyshare.Main.MainFragment">
+    tools:context="com.sh321han.mommyshare.Main.MainFragment"
+    android:background="#e4e9ea">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,25 +14,28 @@
         android:orientation="horizontal"
         android:id="@+id/linearlayout">
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:id="@+id/spinner1"
             android:entries="@array/category_item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center"/>
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:id="@+id/spinner2"
             android:entries="@array/price_item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center"/>
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:id="@+id/spinner3"
             android:entries="@array/dist_item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center"/>
     </LinearLayout>
 
 

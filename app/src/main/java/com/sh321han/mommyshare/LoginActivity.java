@@ -3,6 +3,7 @@ package com.sh321han.mommyshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,11 +25,17 @@ import okhttp3.Request;
 public class LoginActivity extends AppCompatActivity {
 
     CallbackManager callbackManager;
+//    SharedPreferences mPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        mPref = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        /*mPref.getString("")*/
+//        int x = mPref.getInt("member_id", 0);
+
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -39,19 +46,25 @@ public class LoginActivity extends AppCompatActivity {
                 AccessToken token = AccessToken.getCurrentAccessToken();
                 if (token != null) {
                     LoginManager.getInstance().logOut();
+//                    SharedPreferences.Editor editor =  mPref.edit();
+//                    editor.remove("memeber_id");
                 }
                 if (token == null) {
                     LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                         @Override
                         public void onSuccess(LoginResult loginResult) {
                             AccessToken token = AccessToken.getCurrentAccessToken();
-                            NetworkManager.getInstance().login(LoginActivity.this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<com.sh321han.mommyshare.data.LoginResult>(){
+                            NetworkManager.getInstance().login(LoginActivity.this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<com.sh321han.mommyshare.data.LoginResult>() {
                                 @Override
                                 public void onSuccess(Request request, com.sh321han.mommyshare.data.LoginResult result) {
                                     if (result.getSuccess()) {
                                         if (result.getMessage().equals("OK")) {
-
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                            SharedPreferences.Editor editor =  mPref.edit();
+//                                            editor.putInt("member_id", result.getResult().getMember_id());
+
+
+
                                         } else if (result.getMessage().equals("NOTREGISTER")) {
 
                                             startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
@@ -61,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFail(Request request, IOException exception) {
-
+                                    Log.d("실패","ㅇㅇㅇ");
                                 }
                             });
                         }

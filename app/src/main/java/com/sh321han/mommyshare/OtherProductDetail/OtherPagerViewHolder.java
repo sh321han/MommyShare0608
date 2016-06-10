@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.sh321han.mommyshare.R;
+import com.sh321han.mommyshare.data.ProductDetailData;
 
 
 /**
@@ -16,7 +17,8 @@ public class OtherPagerViewHolder extends RecyclerView.ViewHolder {
     private static final String MOMMYSHARE_SERVER = "http://52.79.57.157:3000";
     PagerAdapter mAdapter;
     ViewPager pager;
-    String data;
+//    String data;
+    ProductDetailData data;
 
 
     public OtherPagerViewHolder(View itemView) {
@@ -45,8 +47,10 @@ public class OtherPagerViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setData(String data) {
+    public void setData(ProductDetailData data) {
         this.data = data;
+
+
 
 
     }

@@ -15,6 +15,7 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
 
 
     ProductDetailData item = null;
+//    OtherPagerAdapter mAdapter = new OtherPagerAdapter();
 
 
     OtherWriteViewHolder.OnClickButtonListener mListener;
@@ -52,7 +53,7 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
             return VIEW_TYPE_DESC;
         } else if (position == 3) {
             return VIEW_TYPE_DETAIL;
-        } else if (position == 4) {
+        } else if (position == 4){
             return VIEW_TYPE_WRITE;
         } else {
             return VIEW_TYPE_REVIEW;
@@ -89,9 +90,9 @@ public class OtherProductDetailAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-//            case VIEW_TYPE_PAGER :
-//                ((OtherPagerViewHolder)holder).setData(item);
-//                break;
+            case VIEW_TYPE_PAGER :
+                ((OtherPagerViewHolder)holder).setData(item);
+                break;
             case VIEW_TYPE_LENDER:
                 ((LenderViewHolder) holder).setData(item);
                 break;

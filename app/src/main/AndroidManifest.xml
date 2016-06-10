@@ -41,14 +41,7 @@
             android:name=".Chatting.ChattingListActivity"
             android:label="@string/title_activity_chatting_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Notice.NoticeActivity"
-            android:label="@string/title_activity_notice"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Notice.NoticeDetailActivity"
-            android:label="@string/title_activity_notice_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".MyProductList.MyProductListActivity"
             android:label="@string/title_activity_my_product_list"
@@ -105,7 +98,10 @@
             android:name=".Write.WriteLocationActivity"
             android:label="@string/title_activity_write_location"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+
+            android:theme="@style/AppTheme.NoStatusBar"/>
         <activity android:name=".SignUpActivity"></activity>
 
 

@@ -34,6 +34,10 @@ public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
 
+    public static final String ACTION_CHAT = "com.sh321han.mommyshare.action.chat";
+    public static final String EXTRA_SENDER_ID = "senderid";
+    public static final String EXTRA_RESULT = "result";
+
     /**
      * Called when message is received.
      *
@@ -44,7 +48,9 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
+        String type = data.getString("type");
+        String senderid = data.getString("sender");
+        String message = data.getString("title");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
@@ -52,6 +58,32 @@ public class MyGcmListenerService extends GcmListenerService {
             // message received from some topic.
         } else {
             // normal downstream message.
+
+//            if (type.equals("chat")) {
+//                long serverid = Long.parseLong(senderid);
+//                String lastDate = DataManager.getInstance().getLastDate(serverid);
+//                try {
+//                    MyResult<List<ChatMessage>> result = NetworkManager.getInstance().getMessageSync(lastDate);
+//                    String notiMessage = null;
+//                    User u = null;
+//                    for (ChatMessage m : result.result) {
+//                        long id = DataManager.getInstance().getUserTableId(m.sender);
+//                        DataManager.getInstance().addChatMessage(id, DataConstant.ChatTable.TYPE_RECEIVE, m.message, m.date);
+//                        notiMessage = m.sender.userName + ":" + m.message;
+//                        u = m.sender;
+//                    }
+//                    Intent intent = new Intent(ACTION_CHAT);
+//                    intent.putExtra(EXTRA_SENDER_ID, serverid);
+//                    LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
+//                    boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
+//                    if (!isProcessed) {
+//                        sendNotification(notiMessage, u);
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
         }
 
         // [START_EXCLUDE]
@@ -79,15 +111,16 @@ public class MyGcmListenerService extends GcmListenerService {
      */
     private void sendNotification(String message) {
         Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra(ChattingActivity.EXTRA_USER, user);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setTicker("GCM Message")
+                .setTicker(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("GCM Message")
+                .setContentTitle(message)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

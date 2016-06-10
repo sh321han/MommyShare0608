@@ -13,10 +13,18 @@ import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.sh321han.mommyshare.GCM.RegistrationIntentService;
+import com.sh321han.mommyshare.Main.MainActivity;
+import com.sh321han.mommyshare.Manager.NetworkManager;
 import com.sh321han.mommyshare.Manager.PropertyManager;
+import com.sh321han.mommyshare.data.LoginResult;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -75,13 +83,30 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void doRealStart() {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
-            }
-        }, 2000);
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token != null) {
+            NetworkManager.getInstance().login(this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<LoginResult>() {
+                @Override
+                public void onSuccess(Request request, LoginResult result) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                }
+
+                @Override
+                public void onFail(Request request, IOException exception) {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    finish();
+                }
+            });
+        } else {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }, 2000);
+        }
     }
 
     private boolean checkPlayServices() {

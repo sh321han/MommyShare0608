@@ -4,14 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.sh321han.mommyshare.LoginActivity">
+    tools:context="com.sh321han.mommyshare.LoginActivity"
+    android:background="@drawable/splash_bg">
 
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:src="@drawable/logo_icon_01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="152dp"/>
+    
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:id="@+id/btn_login"
+        android:background="@drawable/login_btn_01"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="111dp" />
